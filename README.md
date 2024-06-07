@@ -44,6 +44,7 @@ El elemento 2 es el link que nos redirige hacia la pantalla de administración d
 
 <br/>
 <br/>
+Pantalla Ventas
 <div align="center">
   <img alt="Demo" src="public/assets/ventasReadme.png" />
 </div>
@@ -56,12 +57,12 @@ El elemento 3 es el boton que nos abre un modal y este nos ayuda a editar un art
 
 <br/>
 <br/>
+Pantalla Facturación
 <div align="center">
   <img alt="Demo" src="public/assets/facturacionReadme.png" />
 </div>
 <br/>
 <br/>
-
 El elemento 1 es un selector que nos abre las opciones de los códigos de los artículos a elegir, al seleccionarlo los datos de este se cargan para ser agregado. 
 El elemento 2 es el que nos muestra el nombre del artículo seleccionado. 
 El elemento 3 es el input donde se espera que el usuario inserte la cantidad de artículos que desea agregar a la orden. 
