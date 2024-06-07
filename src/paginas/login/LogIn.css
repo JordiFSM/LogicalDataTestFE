@@ -1,0 +1,31 @@
+.body2 {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    background-image: url('../../../public/assets/ventas.webp');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  }
+
+.typography-component {
+    background-color: #ffffff; /* Fondo blanco para el texto */
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+.typography-component h1 {
+    font-family: 'Times New Roman', Times, serif;
+    color: #0368ff; /* Color rojo similar al de la imagen */
+    font-size: 2rem; /* Tamaño de la fuente ajustado */
+    margin: 0;
+}
+
+.red-button {
+    background-color: #e74c3c; /* Color rojo */
+}
