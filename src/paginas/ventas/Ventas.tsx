@@ -19,6 +19,7 @@ import * as Constantes from '../../constantes/Constantes';
 import { usePaginaVentas } from './store';
 import { ModalConfirmacion } from '../../componentes/ModalConfirmar/ModalConfirmar';
 import Footer from '../../componentes/Footer/Footer2';
+import BackButton from '../../componentes/Buttons/BackButton';
 
 
 /**
@@ -80,7 +81,7 @@ export const Ventas = () => {
       getActions: (p: any) => [
         <GridActionsCellItem
           icon={<Iconos.Edit />}
-          style={{color:'blue'}}
+          style={{ color: 'blue' }}
 
           label={Constantes.EDITAR}
           onClick={() => {
@@ -90,7 +91,7 @@ export const Ventas = () => {
         />,
         <GridActionsCellItem
           icon={<Iconos.Delete />}
-          style={{color:'red'}}
+          style={{ color: 'red' }}
           label={Constantes.ELIMINAR}
           onClick={() => {
             establecerModalBorrarAbierto(p.row.id);
@@ -101,7 +102,7 @@ export const Ventas = () => {
   ];
 
   const productos = usePaginaVentas((state) => state.productos);
-  
+
   const estadoCargando = usePaginaVentas(
     (state) => state.estadoCargando
   );
@@ -195,178 +196,182 @@ export const Ventas = () => {
 
   return (
     <div>
-      <Container style={{marginTop: "10%"}}>
-      <Grid container item xs={12} justifyContent='space-between' spacing={2} marginBottom='10%'>
-        <Grid container item xs={12} justifyContent='space-between'>
-          <Grid item>
-            <Typography component='h1' variant='h4'>
-              {Constantes.MENU_ARTICULOS}
-            </Typography>
-          </Grid>
-          <Grid item alignSelf='center'>
-            <Button
-              startIcon={<Iconos.Add />}
-              color='success'
-              variant='contained'
-              onClick={() => establecerModalAgregarEditarAbierto()}
-            >
-              <Typography>{Constantes.AGREGAR}</Typography>
-            </Button>
-          </Grid>
-        </Grid>
-        <Dialog
-          open={modalAbiertoAgregarEditar}
-          maxWidth='md'
-          onClose={() => establecerModalAgregarEditarCerrar()}
-        >
-          <DialogTitle>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography variant='h5'>{tituloModal}</Typography>
-              </Grid>
+
+      <Container style={{ marginTop: "8%", marginBottom: '3%', backgroundColor: 'rgb(167, 170, 172)' }}>        
+        <Grid container item xs={12} justifyContent='space-between' spacing={2} marginBottom='10%' marginTop='2%' >
+          <div style={{ marginTop: "1%", marginLeft:'2%'}}>
+            <BackButton route="/home" />          
+          </div>
+          <Grid container item xs={12} justifyContent='space-between'>            
+            <Grid item>
+              <Typography component='h1' variant='h4'>
+                {Constantes.MENU_ARTICULOS}
+              </Typography>
             </Grid>
-          </DialogTitle>
-          <DialogContent>
-            <Box
-              noValidate
-              component='form'
-              onSubmit={(e) => {
-                e.preventDefault();
-                productoAgregarEditar();
-              }}
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: 2,
-                justifyContent: 'center'
-              }}
-            >
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    required={true}
-                    label='Nombre del articulo'
-                    onChange={(e) => establecerNombre(e.target.value)}
-                    value={nombreProducto}
-                  ></TextField>
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required={true}
-                    label='Descripción del articulo'
-                    onChange={(e) => establecerDescripcion(e.target.value)}
-                    value={descripcionProducto}
-                  ></TextField>
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required={true}
-                    type='number'
-                    label='Precio del articulo'
-                    onChange={(e) => establecerPrecio(Number(e.target.value))}
-                    value={precioProducto}
-                  ></TextField>
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={ivaProducto}
-                        onChange={(e) => establecerAplicaIVA(!ivaProducto)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                      />
-                    }
-                    label={ivaProducto? Constantes.IVA_APLICA + " " + Constantes.IVA : Constantes.IVA_NO_APLICA + " " + Constantes.IVA }
-                  ></FormControlLabel>
-                </Grid>
-              </Grid>
+            <Grid item alignSelf='center'>
               <Button
-                id='botonSubmitAgregarEditar'
-                type='submit'
-                style={{ display: 'none' }}
+                startIcon={<Iconos.Add />}
                 color='success'
                 variant='contained'
+                onClick={() => establecerModalAgregarEditarAbierto()}
               >
                 <Typography>{Constantes.AGREGAR}</Typography>
               </Button>
-            </Box>
-          </DialogContent>
-          <DialogActions>
-            <Grid
-              container
-              spacing={2}
-              justifyContent='center'
-              style={{ marginBottom: 4 }}
-            >
-              <Grid
-                container
-                item
-                justifyContent='center'
-                alignItems='center'
-                spacing={2}
-              >
-                <Grid item>
-                  <Button
-                    startIcon={<Iconos.Cancel />}
-                    onClick={() => establecerModalAgregarEditarCerrar()}
-                    variant='contained'
-                    color='secondary'
-                  >
-                    <Typography>{Constantes.CANCELAR}</Typography>
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button
-                    type='submit'
-                    color='primary'
-                    variant='contained'
-                    style={{ width: '100%' }}
-                    startIcon={<Iconos.Save />}
-                    onClick={() =>
-                      document
-                        .getElementById('botonSubmitAgregarEditar')
-                        ?.click()
-                    }
-                  >
-                    <Typography>{Constantes.GUARDAR}</Typography>
-                  </Button>
+            </Grid>
+          </Grid>
+          <Dialog
+            open={modalAbiertoAgregarEditar}
+            maxWidth='md'
+            onClose={() => establecerModalAgregarEditarCerrar()}
+          >
+            <DialogTitle>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <Typography variant='h5'>{tituloModal}</Typography>
                 </Grid>
               </Grid>
-            </Grid>
-          </DialogActions>
-        </Dialog>
-        <Grid style={{ display: 'grid', height: 460 }} item xs={12}>
-          <Tabla
-            titulo={Constantes.LISTADO_ARTICULOS}
-            columnas={columns}
-            registros={productos}            
-            cargando={estadoCargando === 'cargando'}
-            customDatosId={(productos) => productos.codigo}
-          ></Tabla>
+            </DialogTitle>
+            <DialogContent>
+              <Box
+                noValidate
+                component='form'
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  productoAgregarEditar();
+                }}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  padding: 2,
+                  justifyContent: 'center'
+                }}
+              >
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      required={true}
+                      label='Nombre del artículo'
+                      onChange={(e) => establecerNombre(e.target.value)}
+                      value={nombreProducto}
+                    ></TextField>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required={true}
+                      label='Descripción del artículo'
+                      onChange={(e) => establecerDescripcion(e.target.value)}
+                      value={descripcionProducto}
+                    ></TextField>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required={true}
+                      type='number'
+                      label='Precio del artículo'
+                      onChange={(e) => establecerPrecio(Number(e.target.value))}
+                      value={precioProducto}
+                    ></TextField>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={ivaProducto}
+                          onChange={(e) => establecerAplicaIVA(!ivaProducto)}
+                          inputProps={{ 'aria-label': 'controlled' }}
+                        />
+                      }
+                      label={Constantes.IVA_APLICA}
+                    ></FormControlLabel>
+                  </Grid>
+                </Grid>
+                <Button
+                  id='botonSubmitAgregarEditar'
+                  type='submit'
+                  style={{ display: 'none' }}
+                  color='success'
+                  variant='contained'
+                >
+                  <Typography>{Constantes.AGREGAR}</Typography>
+                </Button>
+              </Box>
+            </DialogContent>
+            <DialogActions>
+              <Grid
+                container
+                spacing={2}
+                justifyContent='center'
+                style={{ marginBottom: 4 }}
+              >
+                <Grid
+                  container
+                  item
+                  justifyContent='center'
+                  alignItems='center'
+                  spacing={2}
+                >
+                  <Grid item>
+                    <Button
+                      startIcon={<Iconos.Cancel />}
+                      onClick={() => establecerModalAgregarEditarCerrar()}
+                      variant='contained'
+                      color='secondary'
+                    >
+                      <Typography>{Constantes.CANCELAR}</Typography>
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      type='submit'
+                      color='primary'
+                      variant='contained'
+                      style={{ width: '100%' }}
+                      startIcon={<Iconos.Save />}
+                      onClick={() =>
+                        document
+                          .getElementById('botonSubmitAgregarEditar')
+                          ?.click()
+                      }
+                    >
+                      <Typography>{Constantes.GUARDAR}</Typography>
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </DialogActions>
+          </Dialog>
+          <Grid style={{ display: 'grid', height: 460 }} item xs={12}>
+            <Tabla
+              titulo={Constantes.LISTADO_ARTICULOS}
+              columnas={columns}
+              registros={productos}
+              cargando={estadoCargando === 'cargando'}
+              customDatosId={(productos) => productos.codigo}
+            ></Tabla>
+          </Grid>
+          <ModalConfirmacion
+            abierto={modalBorrarAbierto}
+            mensaje={Constantes.CONFIRME_DESEA_ELIMINAR_ARTICULO}
+            onConfirmacion={() => establecerModalBorrarAbiertoConfirmacion(true)}
+            onCancelacion={() => establecerModalBorrarAbiertoConfirmacion(false)}
+          />
+
+          <ModalCargando cargando={estadoAgregarEditar === 'cargando'} />
+
+          <ModalAlerta
+            abierto={modalAbierto}
+            tipo={tipoMensaje}
+            mensaje={msjModal}
+            onClose={() => establecerModalMensajesAbierto(false)}
+          />
         </Grid>
-        <ModalConfirmacion
-          abierto={modalBorrarAbierto}
-          mensaje={Constantes.CONFIRME_DESEA_ELIMINAR_ARTICULO}
-          onConfirmacion={() => establecerModalBorrarAbiertoConfirmacion(true)}
-          onCancelacion={() => establecerModalBorrarAbiertoConfirmacion(false)}
-        />
-
-        <ModalCargando cargando={estadoAgregarEditar === 'cargando'} />
-
-        <ModalAlerta
-          abierto={modalAbierto}
-          tipo={tipoMensaje}
-          mensaje={msjModal}
-          onClose={() => establecerModalMensajesAbierto(false)}
-        />
-      </Grid>
-    </Container>
-    <Footer/>
+      </Container>
+      <Footer />
 
     </div>
-    
 
-    
+
+
   );
 };

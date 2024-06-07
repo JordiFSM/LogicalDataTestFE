@@ -1,4 +1,4 @@
-La plicacion fue creada en React utilizando Typescript. 
+La aplicacion fue creada en React utilizando Typescript. 
 
 Para manejar las solicitudes a la API, se utiliza Axios, una biblioteca que simplifica la realización de peticiones HTTP. Además, la gestión del estado de la aplicación se realiza mediante Zustand, una biblioteca ligera y flexible que facilita el manejo y actualización del estado de forma eficiente. Esta combinación de tecnologías permite crear una aplicación web robusta y de alto rendimiento, con una gestión del estado centralizada y una comunicación eficiente con el backend.
 
@@ -11,6 +11,8 @@ Para manejar las solicitudes a la API, se utiliza Axios, una biblioteca que simp
             -> Aqui cambiaremos el puerto por el puerto que nos genere el API
 
 3. Instalar las dependencias con el comando "npm install" desde la terminal abierta anteriormente.
-"# LogicalDataTestFE" 
-"# LogicalDataTestFE" 
-"# LogicalDataTestFE" 
+
+
+Al arrancar la aplicación se presentará la pagina de LogIn, aca se deberán agregar las credenciales:
+
+![texto cualquiera por si no carga la imagen](public\assets\ventas.webp)

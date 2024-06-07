@@ -1,8 +1,10 @@
 import { GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import * as Iconos from '@mui/icons-material';
 import * as Constantes from '../../constantes/Constantes';
+import './Facturas.css';
+
 import { usePaginaFactura } from './store';
-import { Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, Grid, MenuItem, Select, Slide, TextField, Typography, } from '@mui/material';
+import { Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Select, Slide, TextField, Typography, } from '@mui/material';
 
 import { useEffect } from 'react';
 import { Tabla } from '../../componentes/Tabla/Tabla';
@@ -11,6 +13,7 @@ import { ModalAlerta } from '../../componentes/ModalAlerta/ModalAlerta';
 import React from 'react';
 import { TransitionProps } from '@mui/material/transitions';
 import Footer from '../../componentes/Footer/Footer2';
+import BackButton from '../../componentes/Buttons/BackButton';
 
 /**
  * Autor: Jordi Segura Madrigal
@@ -80,7 +83,7 @@ export const Facturas = () => {
         let iva = productos.find(
           (prod) => prod.id === params.row.productoId
         )?.iva;
-        
+
         if (itemCantidad) {
           return iva
             ? (params.row.precio * IVA * params.row.cantidad).toFixed(3)
@@ -92,7 +95,7 @@ export const Facturas = () => {
       field: 'cantidad',
       headerName: Constantes.CANTIDAD,
       flex: 1,
-      minWidth: 100,      
+      minWidth: 100,
     },
     {
       field: 'total',
@@ -110,7 +113,7 @@ export const Facturas = () => {
 
         if (prodCantidad) {
           let total = Number(params.row.precio) * prodCantidad;
-          return iva? (total + total * IVA).toFixed(3) : total;
+          return iva ? (total + total * IVA).toFixed(3) : total;
         }
       },
     },
@@ -124,7 +127,7 @@ export const Facturas = () => {
           icon={<Iconos.Delete />}
           label={Constantes.ELIMINAR}
           onClick={() => {
-            eliminarItem(p.row.id);
+            eliminarItem(p.row.productoId);
           }}
         />,
       ],
@@ -132,7 +135,7 @@ export const Facturas = () => {
   ];
 
   const productos = usePaginaFactura((state) => state.productos);
-  
+
   const items = usePaginaFactura((state) => state.items);
 
   const estadoCargando = usePaginaFactura(
@@ -164,7 +167,7 @@ export const Facturas = () => {
 
   const tipoMensaje = usePaginaFactura((state) => state.tipoMensaje);
 
-  const msjModal = usePaginaFactura((state) => state.msjModal);  
+  const msjModal = usePaginaFactura((state) => state.msjModal);
 
   const agregarOrden = usePaginaFactura((state) => state.agregarOrden);
 
@@ -181,7 +184,7 @@ export const Facturas = () => {
   const establecerCodigo = usePaginaFactura(
     (state) => state.establecerCodigo
   );
-  
+
   const establecerItems = usePaginaFactura(
     (state) => state.establecerItems
   );
@@ -220,7 +223,8 @@ export const Facturas = () => {
 
   return (
     <>
-      <Container>
+      <Container style={{ marginTop: '3%', marginBottom: '3%', backgroundColor: 'rgb(167, 170, 172)' }}>
+
         <Grid
           container
           item
@@ -230,25 +234,36 @@ export const Facturas = () => {
           spacing={2}
           padding={5}
         >
-          <Grid container item xs={12} spacing={10}>
+
+          <Grid container item xs={12} spacing={10} >
+            <div style={{ marginTop: '3%', marginLeft: '3%' }}>
+              <BackButton route="/home" />
+
+            </div>
+
             <Grid item>
-              <Select
-                sx={{ minWidth: 250 }}
-                value={codigo}
-                label={Constantes.CODIGO}
-                onChange={(e) => establecerCodigo(e.target.value)}
-              >
-                {productos.map((prod) => (
-                  <MenuItem key={prod.id} value={prod.codigo}>
-                    {prod.codigo}
-                  </MenuItem>
-                ))}
-              </Select>
+              <FormControl fullWidth>
+                <InputLabel id="cod">{Constantes.CODIGO}</InputLabel>
+                <Select
+                  id='cod'
+                  sx={{ minWidth: 250 }}
+                  value={codigo}
+                  label={Constantes.CODIGO}
+                  onChange={(e) => establecerCodigo(e.target.value)}
+                >
+                  {productos.map((prod) => (
+                    <MenuItem key={prod.id} value={prod.codigo}>
+                      {prod.codigo}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
             </Grid>
             <Grid item>
               <TextField
                 required={true}
-                label='Producto'
+                label='Artículo'
                 value={nombre}
               ></TextField>
             </Grid>
@@ -284,10 +299,10 @@ export const Facturas = () => {
             ></Tabla>
           </Grid>
           <Grid item display='flex' justifyContent='flex-end'>
-              <Typography>
-                {Constantes.ORDEN_SUBTOTAL}: {subTotalFactura}
-              </Typography>
-            </Grid>
+            <Typography>
+              {Constantes.ORDEN_SUBTOTAL}: {subTotalFactura}
+            </Typography>
+          </Grid>
           <Grid
             style={{
               display: 'flex',
@@ -300,8 +315,8 @@ export const Facturas = () => {
           >
             <Grid item>
               <Button
-                startIcon={<Iconos.ShoppingCart />}
-                color='success'
+                startIcon={<Iconos.ShoppingBag />}
+                color='warning'
                 variant='contained'
                 type='submit'
                 onClick={() => agregarOrden()}
@@ -364,11 +379,14 @@ export const Facturas = () => {
                 <Grid item xs={2}><Typography variant="body2" align="center">{Constantes.IVA}</Typography></Grid>
                 <Grid item xs={2}><Typography variant="body2" align="center">{Constantes.ORDEN_SUBTOTAL}</Typography></Grid>
               </Grid>
+
+
               {items.map((item, index) => (
+
                 <React.Fragment key={index}>
-                  <Grid container item spacing={1} alignItems="center" style={{ borderTop: '1px solid #ddd', paddingTop: 8, paddingBottom: 8 }}>
+                  <Grid container item spacing={1} alignItems="center" style={{ borderTop: '1px solid #ddd', paddingTop: 8, paddingBottom: 8, marginTop:'1px'}}>
                     <Grid item xs={2}>
-                      <Typography variant="body1" align="center">{item.productoId}</Typography>
+                      <Typography variant="body1" align="center">{productos.find((prod) => prod.id === item.productoId)?.nombre}</Typography>
                     </Grid>
                     <Grid item xs={2}>
                       <Typography variant="body1" align="center">{item.cantidad}</Typography>
@@ -392,14 +410,14 @@ export const Facturas = () => {
                   <Grid container item spacing={1} style={{ paddingBottom: 8 }}>
                     <Grid item xs={12}>
                       <Typography variant="body2" color="textSecondary" align="center">
-                        {productos.find((prod) => prod.id === item.productoId)?.nombre}
                       </Typography>
+                      {'código: ' + productos.find((prod) => prod.id === item.productoId)?.codigo}
                     </Grid>
                   </Grid>
-                </React.Fragment>
-              ))}
+                </React.Fragment>                
+              ))}              
             </Grid>
-            <Grid container justifyContent="flex-end" style={{ marginTop: 16 }}>
+            <Grid container justifyContent="flex-end" style={{ marginTop: 16, borderTop: '1px solid #ddd' }}>
               <Grid item xs={6} sm={4}>
                 <Typography variant="h6" align="right">
                   {Constantes.IVA + ": " + ivaFactura.toFixed(2)}
@@ -421,7 +439,7 @@ export const Facturas = () => {
         </Dialog>
 
       </Container>
-      <Footer/>
+      <Footer />
     </>
   );
 };

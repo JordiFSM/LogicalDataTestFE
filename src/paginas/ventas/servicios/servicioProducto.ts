@@ -27,7 +27,6 @@ export const servicioProducto = {
         .then((res) => {
           respuestaFinal.dato = res.data.dato;
           respuestaFinal.respuestaExitosa = true;
-          console.log(respuestaFinal)
         });
       
     } catch (error: any) {
