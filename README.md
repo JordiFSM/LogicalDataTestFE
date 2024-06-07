@@ -15,4 +15,4 @@ Para manejar las solicitudes a la API, se utiliza Axios, una biblioteca que simp
 
 Al arrancar la aplicación se presentará la pagina de LogIn, aca se deberán agregar las credenciales:
 
-![texto cualquiera por si no carga la imagen](public\assets\ventas.webp)
+![texto cualquiera por si no carga la imagen] url(public\assets\ventas.webp)
