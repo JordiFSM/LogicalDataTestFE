@@ -17,7 +17,7 @@ Al arrancar la aplicación se presentará la pagina de LogIn, aca se deberán ag
 
 <br/>
 <div align="center">
-  <img alt="Demo" src="public/assets/ventas.png" />
+  <img alt="Demo" src="public/assets/ventas.webp" />
 </div>
 <br/>
 <br/>
